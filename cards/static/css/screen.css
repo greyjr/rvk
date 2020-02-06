@@ -1,54 +1,14 @@
 body{
-  background: #DDDDDD;
+  background: #C8D2A0;
+  font-size: small;
 }
-
-.table2 table{
-	table-layout: fixed;
+form{
+  margin: 5px;
 }
-.table2 td{
- border: 1px solid dimgrey;
- border-collapse: collapse;
- font-size: 11px;
- padding-left: 4px;
- max-width: 14vw;
-
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-
+.row{
+  margin-right: 1px;
+  margin-left: 1px;
 }
-.table2 th{
-	font-weight: normal;
-	font-size: 12px;
-	padding-left: 10px;
+.input{
 
-}
-
-.buttons {
-	border: 1px solid lightgrey;
-	padding: 5px;
-	max-width: 60%;
-	margin-left: 20%;
-
-}
-
-.buttons a {
-	display: inline-block;
-	margin: 5px;
-	margin-right: 0px;
-}
-
-#chooseanother {
-	border: 2px solid darkgrey;
-	border-radius: 5%;
-	text-decoration: none;
-	color: grey;
-	margin-left: 5px;
-	padding-right: 5px;
-	padding-left: 5px;
-
-}
-#chooseanother:hover {
-	background-color: darkgrey;
-	color: white;
 }

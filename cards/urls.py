@@ -1,9 +1,9 @@
 from django.conf.urls import url
 from django.urls import path
-from . import views
+from .views import *
 
 
 urlpatterns = [
-    url(r'^$', views.index),
-    # path('personal_main/<int:inn>', views.personal_main),
+    url(r'^$', index),
+    path('create', CardCreate.as_view(), name='card_create_url'),
 ]
