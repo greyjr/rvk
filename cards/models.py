@@ -27,14 +27,14 @@ class Card(models.Model):
     birth_date = models.DateField()
     address_person = models.CharField(max_length=128)
     address_person_fact = models.CharField(max_length=128)
-    phone = models.DecimalField(max_digits=9, decimal_places=0)     # (+380 ...)
-    work = models.CharField(max_length=256, default='ТНП')
+    phone = models.CharField(max_length=16, blank=True)
+    work = models.CharField(max_length=256)
     vos = models.CharField(max_length=6)
     rank = models.CharField(max_length=24)
-    vlk = models.DateField()
+    vlk = models.DateField(blank=True)
     suitability = models.CharField(max_length=24)
-    delay = models.DateField()
-    team = models.CharField(max_length=64, default='без команди')
+    delay = models.DateField(blank=True)
+    team = models.CharField(max_length=64)
 
     def age_person(self):
         yrs = {'1': 'рік', '234': 'роки', '567890': 'років'}
@@ -49,6 +49,9 @@ class Card(models.Model):
 
     def is_vlk(self):
         return bool(self.vlk)
+
+    def is_phone(self):
+        return bool(self.phone)
 
     def fact_delay(self):
         if not self.is_delay:

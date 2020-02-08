@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'cards/wrapper.html' %}
 
-</body>
-</html>
+{% block title %}
+main page
+{% endblock %}
+
+{% block content %}
+
+<br>
+
+<div align="center">
+    <div align="center">
+        <a href="/#" class="btn btn-outline-secondary ">Пошук</a>
+        <a href="/create" class="btn btn-outline-secondary ">Реєстрація</a>
+        <a href="/#" class="btn btn-outline-secondary ">Редагування</a>
+    </div>
+</div>
+
+{% endblock %}

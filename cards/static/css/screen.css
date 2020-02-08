@@ -9,6 +9,13 @@ form{
   margin-right: 1px;
   margin-left: 1px;
 }
-.input{
+table{
 
+}
+th{
+  font-weight: normal;
+}
+td, th{
+  border: solid 1px #688d5e;
+  width: 100px;
 }

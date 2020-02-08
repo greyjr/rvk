@@ -1,0 +1,67 @@
+{% extends 'cards/wrapper.html' %}
+
+{% block title %}
+    база
+{% endblock %}
+
+{% block content %}
+
+    <br>
+
+    <div align="center">
+        <div align="center">
+            <a href="/#" class="btn btn-outline-secondary ">На головну сторінку</a>
+            <a href="/create" class="btn btn-outline-secondary ">Реєстрація</a>
+        </div>
+    </div>
+    <br>
+    <div class="" align="center">
+        <table class="table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th>Номер</th>
+                <th>ПІБ</th>
+                <th>звання</th>
+                <th>ВОС</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for card in cards %}
+                <tr class="table-row" data-href="{% url 'card_edit_url' card.id %}">
+                    <td>{{ card.inn }}</td>
+                    <td>{{ card }}</td>
+                    <td>{{ card.rank }}</td>
+                    <td>{{ card.vos }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+        <div class="pagination">
+    <span>
+        {% if cards.has_previous %}
+            <a href="?page={{ cards.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ cards.number }} of {{ cards.paginator.num_pages }}.
+        </span>
+
+        {% if cards.has_next %}
+            <a href="?page={{ cards.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function($) {
+            $(".table-row").click(function() {
+                window.document.location = $(this).data("href");
+            });
+        });
+
+    </script>
+
+{% endblock %}
