@@ -10,10 +10,39 @@ main page
 
 <div align="center">
     <div align="center">
-        <a href="/#" class="btn btn-outline-secondary ">Пошук</a>
-        <a href="/create" class="btn btn-outline-secondary ">Реєстрація</a>
-        <a href="/#" class="btn btn-outline-secondary ">Редагування</a>
+        <a href="/" class="btn btn-outline-secondary btn-sm">На головну сторінку</a>
+        <a href="{% url 'card_edit_url' idi %}" class="btn btn-outline-secondary btn-sm">Редагування</a>
     </div>
 </div>
 
+    <br>
+    <div align="center" class="row">
+    <div class="col-6" align="right" style="padding-right: 10px">
+
+        <table id="personal_card">
+            <tbody>
+            {% for key, value in data_first.items %}
+                <tr>
+                    <td id="personal_card_header">{{ key }}</td>
+                    <td id="personal_card_cell">{{ value }}</td>
+                </tr>
+           {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-6" align="left" style="padding-left: 10px">
+         <table id="personal_card">
+            <tbody>
+            {% for key, value in data_second.items %}
+                <tr>
+                    <td id="personal_card_header">{{ key }}</td>
+                    <td id="personal_card_cell">{{ value }}</td>
+                </tr>
+           {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    </div>
 {% endblock %}

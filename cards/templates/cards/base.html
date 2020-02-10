@@ -10,24 +10,24 @@
 
     <div align="center">
         <div align="center">
-            <a href="/#" class="btn btn-outline-secondary ">На головну сторінку</a>
-            <a href="/create" class="btn btn-outline-secondary ">Реєстрація</a>
+            <a href="/#" class="btn btn-outline-secondary btn-sm">На головну сторінку</a>
+            <a href="/create" class="btn btn-outline-secondary btn-sm">Реєстрація</a>
         </div>
     </div>
     <br>
     <div class="" align="center">
         <table class="table-hover">
             <thead class="thead-dark">
-            <tr>
-                <th>Номер</th>
-                <th>ПІБ</th>
-                <th>звання</th>
-                <th>ВОС</th>
+            <tr id="table_base_header">
+                <th width="100px">Номер</th>
+                <th width="200px">ПІБ</th>
+                <th width="150px">звання</th>
+                <th width="80px">ВОС</th>
             </tr>
             </thead>
             <tbody>
             {% for card in cards %}
-                <tr class="table-row" data-href="{% url 'card_edit_url' card.id %}">
+                <tr class="table-row" data-href="{% url 'personal_view_url' card.id %}">
                     <td>{{ card.inn }}</td>
                     <td>{{ card }}</td>
                     <td>{{ card.rank }}</td>
@@ -36,24 +36,39 @@
             {% endfor %}
             </tbody>
         </table>
-
-
-        <div class="pagination">
-    <span>
-        {% if cards.has_previous %}
-            <a href="?page={{ cards.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ cards.number }} of {{ cards.paginator.num_pages }}.
-        </span>
-
-        {% if cards.has_next %}
-            <a href="?page={{ cards.next_page_number }}">next</a>
-        {% endif %}
-    </span>
-        </div>
     </div>
+    <br>
+
+    <nav>
+        <ul class="pagination justify-content-center">
+            {% if cards.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ cards.previous_page_number }}">Попередня</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ cards.previous_page_number }}">{{ cards.previous_page_number }}</a></li>
+
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true">Попередня</a></li>
+
+            {% endif %}
+
+                <li class="page-item active" aria-current="page">
+                    <span class="page-link">
+                        {{ cards.number }} <span class="sr-only">(current)</span></span></li>
+
+            {% if cards.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ cards.next_page_number }}">{{ cards.next_page_number }}</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ cards.next_page_number }}">Наступна</a></li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="1" aria-disabled="true">Наступна</a></li>
+            {% endif %}
+
+
+        </ul>
+    </nav>
+
 
     <script>
         $(document).ready(function($) {

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Card
 from django.views.generic import View
 from .forms import CardForm
@@ -40,7 +40,8 @@ class CardEdit(View):
         bound_form = CardForm(request.POST)
         if bound_form.is_valid():
             bound_form.update(idi)
-            return render(request, 'cards/main.html')
+            return redirect('base_url')
+            # return render(request, 'cards/main.html')
         return render(request, 'cards/edit_card.html', context={'form': bound_form, 'idi': idi})
 
 
@@ -55,7 +56,7 @@ def delete(request, idi):
 
 def base(request):
     card_list = Card.objects.all()
-    paginator = Paginator(card_list, 3)
+    paginator = Paginator(card_list, 25)
     page = request.GET.get('page')
     try:
         cards = paginator.page(page)
@@ -64,3 +65,27 @@ def base(request):
     except EmptyPage:
         cards = paginator.page(paginator.num_pages)
     return render(request, 'cards/base.html', context={'cards': cards})
+
+
+def personal_view(request, idi):
+    card = Card.objects.get(id=idi)
+    fields_first = ['Персональний номер',
+                    "Прізвище",
+                    "Ім'я",
+                    'По-батькові',
+                    "Дата народження",
+                    "Телефон",
+                    "Звання",
+                    "Придатність",
+                    "Відсрочка"]
+    fields_second = ["Адреса реєстрації",
+                     "Фактична адреса проживання",
+                     "Місце роботи / посада",
+                     "ВОС",
+                     "ВЛК",
+                     "Команда"]
+    data_first = {fields_first[i]: card.get_first_personal_page_values()[i] for i in range(9)}
+    data_second = {fields_second[i]: card.get_second_personal_page_values()[i] for i in range(6)}
+    return render(request, 'cards/personal_main.html', context={'data_first': data_first,
+                                                                'data_second': data_second,
+                                                                'idi': idi})

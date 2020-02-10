@@ -64,3 +64,22 @@ class Card(models.Model):
 
     def __str__(self):
         return self.surname_person + ' ' + self.name_person[0] + '. ' + self.patronymic_person[0] + '.'
+
+    def get_first_personal_page_values(self):
+        return [self.inn,
+                self.surname_person,
+                self.name_person,
+                self.patronymic_person,
+                self.birth_date,
+                self.phone,
+                self.rank,
+                self.suitability,
+                self.delay]
+
+    def get_second_personal_page_values(self):
+        return [self.address_person,
+                self.address_person_fact,
+                self.work,
+                self.vos,
+                self.vlk,
+                self.team]

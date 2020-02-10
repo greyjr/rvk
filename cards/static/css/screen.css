@@ -9,13 +9,48 @@ form{
   margin-right: 1px;
   margin-left: 1px;
 }
-table{
 
-}
 th{
   font-weight: normal;
+  text-align: center;
+}
+#table_base_header{
+  background: #bac493;
 }
 td, th{
   border: solid 1px #688d5e;
-  width: 100px;
+}
+td{
+  padding-left: 7px;
+}
+#personal_card{
+text-align: left;
+border-collapse: separate;
+border-spacing: 5px;
+background: #ECE9E0;
+color: #656665;
+border: 16px solid #ECE9E0;
+border-radius: 10px;
+}
+#personal_card_header{
+  font-size: 14px;
+  padding: 10px;
+  border: none;
+}
+#personal_card_cell{
+  background: #9de09d;
+  padding: 10px;
+  border: none;
+  color: #343a3e;
+}
+#pagination{
+  position: center;
+  display: flow;
+}
+.page-item.active .page-link {
+    background-color: #b3c68b !important;
+    border: 1px solid #C8D2A0;
+}
+.page-link {
+    color: black !important;
 }
