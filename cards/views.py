@@ -55,8 +55,12 @@ def delete(request, idi):
 
 
 def base(request):
-    card_list = Card.objects.all()
-    paginator = Paginator(card_list, 25)
+    mode = request.GET.get('mode')
+    if mode not in ['inn', 'surname_person', 'rank', 'vos']:
+        mode = 'surname_person'
+    card_list_unsort = Card.objects.all()
+    card_list = card_list_unsort.order_by(mode)
+    paginator = Paginator(card_list, 25, orphans=3)
     page = request.GET.get('page')
     try:
         cards = paginator.page(page)
@@ -64,7 +68,7 @@ def base(request):
         cards = paginator.page(1)
     except EmptyPage:
         cards = paginator.page(paginator.num_pages)
-    return render(request, 'cards/base.html', context={'cards': cards})
+    return render(request, 'cards/base.html', context={'cards': cards, 'mode': mode})
 
 
 def personal_view(request, idi):

@@ -6,14 +6,24 @@
 
 {% block content %}
 
-    <br>
-
+<br>
     <div align="center">
         <div align="center">
-            <a href="/#" class="btn btn-outline-secondary btn-sm">На головну сторінку</a>
-            <a href="/create" class="btn btn-outline-secondary btn-sm">Реєстрація</a>
+            <a href="/" class="btn btn-outline-secondary btn-sm">На сторінку пошуку</a>
+            <a href="{% url 'card_create_url' %}" class="btn btn-outline-secondary btn-sm">Реєстрація</a>
         </div>
+    <br>
     </div>
+
+
+    <div class="justify-content-center" align="center">
+            <button type="button" class="btn btn-light btn-sm" disabled> сортування:</button>
+            <a href="?page={{ cards.number }};mode=inn" class="btn btn-outline-dark btn-sm">персональний номер</a>
+            <a href="?page={{ cards.number }};mode=surname_person" class="btn btn-outline-dark btn-sm">ПІБ</a>
+            <a href="?page={{ cards.number }};mode=rank" class="btn btn-outline-dark btn-sm">звання</a>
+            <a href="?page={{ cards.number }};mode=vos" class="btn btn-outline-dark btn-sm">ВОС</a>
+    </div>
+
     <br>
     <div class="" align="center">
         <table class="table-hover">
@@ -43,8 +53,8 @@
         <ul class="pagination justify-content-center">
             {% if cards.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ cards.previous_page_number }}">Попередня</a></li>
-                <li class="page-item"><a class="page-link" href="?page={{ cards.previous_page_number }}">{{ cards.previous_page_number }}</a></li>
+                    <a class="page-link" href="?page={{ cards.previous_page_number }};mode={{ mode }}">Попередня</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ cards.previous_page_number }};mode={{ mode }}">{{ cards.previous_page_number }}</a></li>
 
             {% else %}
                 <li class="page-item disabled">
@@ -52,14 +62,14 @@
 
             {% endif %}
 
-                <li class="page-item active" aria-current="page">
+            <li class="page-item active" aria-current="page">
                     <span class="page-link">
                         {{ cards.number }} <span class="sr-only">(current)</span></span></li>
 
             {% if cards.has_next %}
-                <li class="page-item"><a class="page-link" href="?page={{ cards.next_page_number }}">{{ cards.next_page_number }}</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ cards.next_page_number }};mode={{ mode }}">{{ cards.next_page_number }}</a></li>
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ cards.next_page_number }}">Наступна</a></li>
+                    <a class="page-link" href="?page={{ cards.next_page_number }};mode={{ mode }}">Наступна</a></li>
             {% else %}
                 <li class="page-item disabled">
                     <a class="page-link" tabindex="1" aria-disabled="true">Наступна</a></li>
