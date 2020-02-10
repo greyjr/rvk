@@ -10,10 +10,90 @@
 
     <div align="center">
         <div align="center">
-            <a href="/base" class="btn btn-outline-secondary btn-sm">База</a>
-            <a href="/create" class="btn btn-outline-secondary btn-sm">Реєстрація</a>
+            <a href="{% url 'base_url' %}" class="btn btn-outline-secondary btn-sm">База</a>
+            <a href="{% url 'card_create_url' %}" class="btn btn-outline-secondary btn-sm">Реєстрація</a>
         </div>
     </div>
 
+    <br>
+
+    <div align="center">
+
+        <table>
+            <tbody id="search_table">
+            <tr>
+                <td width="350px">
+                    <form action="{% url 'search_url' field='surname_person' %}">
+                        <div class="form-group" align="center">
+                            <label>Пошук за прізвищем </label>
+                            <input class="form-control mr-sm-2" type="search" name="line"
+                                   placeholder="Прізвище" aria-label="Search">
+                        </div>
+                        <div align="center">
+                            <button class="btn btn-outline-secondary" type="submit">Пошук</button>
+                        </div>
+                    </form>
+                </td>
+                <td></td>
+                <td width="350px">
+                    <form action="{% url 'search_url' field='vos' %}">
+                        <div class="form-group" align="center">
+                            <label>Пошук за ВОС </label>
+                            <input class="form-control mr-sm-2" type="search" name="line"
+                                   placeholder="можна декілька шифрів через кому" aria-label="Search">
+                        </div>
+                        <div align="center">
+                            <button class="btn btn-outline-secondary" type="submit">Пошук</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>
+                    <img src="/static/images/search.png" alt="search_ico">
+                </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>
+                    <form action="{% url 'search_url' field='rank' %}">
+                        <div class="form-group" align="center">
+                            <label>Пошук за званням</label>
+                            <select class="custom-select mr-sm-2" name="line">
+                                <option selected value="мол. лейтенант">мол. лейтенант</option>
+                                <option value="лейтенант">лейтенант</option>
+                                <option value="ст. лейтенант">ст. лейтенант</option>
+                                <option value="капітан">капітан</option>
+                                <option value="майор">майор</option>
+                                <option value="підполковник">підполковник</option>
+                                <option value="полковник">полковник</option>
+                            </select>
+                        </div>
+                        <div align="center">
+                            <button class="btn btn-outline-secondary" type="submit">Пошук</button>
+                        </div>
+                    </form>
+                </td>
+                <td></td>
+                <td>
+                    <form action="{% url 'search_url' field='inn' %}">
+                        <div class="form-group" align="center">
+                            <label>Пошук за персональним номером </label>
+                            <input class="form-control mr-sm-2" type="search" name="line"
+                                   placeholder="Персональний номер" aria-label="Search">
+                        </div>
+                        <div align="center">
+                            <button class="btn btn-outline-secondary" type="submit">Пошук</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
 
 {% endblock %}

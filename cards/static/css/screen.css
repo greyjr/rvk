@@ -47,10 +47,22 @@ border-radius: 10px;
   position: center;
   display: flow;
 }
+.table-row:hover{
+  cursor: pointer;
+}
+
 .page-item.active .page-link {
     background-color: #b3c68b !important;
     border: 1px solid #C8D2A0;
 }
 .page-link {
     color: black !important;
+}
+
+#search_table{
+  border: none;
+}
+#search_table>tr>td{
+  border: none;
+  word-break: break-all;
 }

@@ -93,3 +93,16 @@ def personal_view(request, idi):
     return render(request, 'cards/personal_main.html', context={'data_first': data_first,
                                                                 'data_second': data_second,
                                                                 'idi': idi})
+
+
+def search(request, field):
+    if field not in ['inn', 'rank', 'vos', 'surname']:
+        return render(request, 'cards/main.html')
+    return render(request, 'cards/main.html')
+    line = request.GET.get('line')
+
+    if field == 'vos':
+        data = {}
+    else:
+        data = {}
+    return render(request, 'cards/result.html', context={'data', data})

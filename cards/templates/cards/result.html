@@ -1,28 +1,21 @@
 {% extends 'cards/wrapper.html' %}
 
 {% block title %}
-    база
+    результати пошуку
 {% endblock %}
 
 {% block content %}
 
-<br>
+    <br>
+
     <div align="center">
         <div align="center">
             <a href="/" class="btn btn-outline-secondary btn-sm">На сторінку пошуку</a>
             <a href="{% url 'card_create_url' %}" class="btn btn-outline-secondary btn-sm">Реєстрація</a>
         </div>
-    <br>
     </div>
 
 
-    <div class="justify-content-center" align="center">
-            <button type="button" class="btn btn-light btn-sm" disabled> сортування:</button>
-            <a href="?page={{ cards.number }};mode=inn" class="btn btn-outline-dark btn-sm">персональний номер</a>
-            <a href="?page={{ cards.number }};mode=surname_person" class="btn btn-outline-dark btn-sm">ПІБ</a>
-            <a href="?page={{ cards.number }};mode=rank" class="btn btn-outline-dark btn-sm">звання</a>
-            <a href="?page={{ cards.number }};mode=vos" class="btn btn-outline-dark btn-sm">ВОС</a>
-    </div>
 
     <br>
     <div class="" align="center">
@@ -50,7 +43,7 @@
     <br>
 
     <nav>
-        <ul class="pagination pagination-lg justify-content-center">
+        <ul class="pagination justify-content-center">
             {% if cards.has_previous %}
                 <li class="page-item">
                     <a class="page-link" href="?page={{ cards.previous_page_number }};mode={{ mode }}">Попередня</a></li>
