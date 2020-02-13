@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Card
 from django.views.generic import View
-from .forms import CardForm
+from .forms import CardForm, CardFormEdit
 from django.http import HttpResponseNotFound
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -24,7 +24,7 @@ class CardCreate(View):
         bound_form = CardForm(request.POST)
         if bound_form.is_valid():
             bound_form.save()
-            return render(request, 'cards/main.html')       # F I X
+            return redirect('base_url')
         return render(request, 'cards/create_card.html', context={'form': bound_form})
 
 
@@ -33,15 +33,14 @@ class CardEdit(View):
         old_data = Card.objects.get(id=idi).__dict__
         old_data.pop('_state')
         card_id = old_data.pop('id')
-        form = CardForm(old_data)
+        form = CardFormEdit(old_data)
         return render(request, 'cards/edit_card.html', context={'form': form, 'idi': card_id})
 
     def post(self, request, idi):
-        bound_form = CardForm(request.POST)
+        bound_form = CardFormEdit(request.POST)
         if bound_form.is_valid():
             bound_form.update(idi)
             return redirect('base_url')
-            # return render(request, 'cards/main.html')
         return render(request, 'cards/edit_card.html', context={'form': bound_form, 'idi': idi})
 
 
@@ -58,8 +57,7 @@ def base(request):
     mode = request.GET.get('mode')
     if mode not in ['inn', 'surname_person', 'rank', 'vos']:
         mode = 'surname_person'
-    card_list_unsort = Card.objects.all()
-    card_list = card_list_unsort.order_by(mode)
+    card_list = Card.objects.all().order_by(mode)
     paginator = Paginator(card_list, 25, orphans=3)
     page = request.GET.get('page')
     try:
@@ -78,6 +76,7 @@ def personal_view(request, idi):
                     "Ім'я",
                     'По-батькові',
                     "Дата народження",
+                    "Вік",
                     "Телефон",
                     "Звання",
                     "Придатність",
@@ -88,21 +87,39 @@ def personal_view(request, idi):
                      "ВОС",
                      "ВЛК",
                      "Команда"]
-    data_first = {fields_first[i]: card.get_first_personal_page_values()[i] for i in range(9)}
+    data_first = {fields_first[i]: card.get_first_personal_page_values()[i] for i in range(10)}
     data_second = {fields_second[i]: card.get_second_personal_page_values()[i] for i in range(6)}
     return render(request, 'cards/personal_main.html', context={'data_first': data_first,
                                                                 'data_second': data_second,
                                                                 'idi': idi})
 
 
-def search(request, field):
-    if field not in ['inn', 'rank', 'vos', 'surname']:
-        return render(request, 'cards/main.html')
-    return render(request, 'cards/main.html')
-    line = request.GET.get('line')
+def parsed(line):
+    numbers = []
+    line_split = line.replace(',', ' ').replace('.', ' ').split(' ')
+    for position in range(len(line_split)):
+        may_be = ''
+        for i in line_split[position]:
+            if i in '0123456789':
+                may_be += i
+        if len(may_be) in range(3, 7):
+            numbers.append(may_be)
+    return numbers
 
+
+def search(request, field):
+    if field not in ['inn', 'rank', 'vos', 'surname_person']:
+        return render(request, 'cards/main.html')
+    line = request.GET.get('line')
+    if not line:
+        return redirect('base_url')
     if field == 'vos':
-        data = {}
+        numbers = parsed(line)
+        data = Card.objects.filter(vos__contains=numbers[0])
+        for number in numbers[1:]:
+            data = data.union(Card.objects.filter(vos__contains=number))
+    elif field == 'rank':
+        data = Card.objects.filter(rank__exact=line)
     else:
-        data = {}
-    return render(request, 'cards/result.html', context={'data', data})
+        data = Card.objects.filter(**{'{}'.format(field): line})
+    return render(request, 'cards/result.html', context={'cards': data})

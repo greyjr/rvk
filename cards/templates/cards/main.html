@@ -34,13 +34,15 @@
                         </div>
                     </form>
                 </td>
+
                 <td></td>
                 <td width="350px">
                     <form action="{% url 'search_url' field='vos' %}">
                         <div class="form-group" align="center">
                             <label>Пошук за ВОС </label>
                             <input class="form-control mr-sm-2" type="search" name="line"
-                                   placeholder="можна декілька шифрів через кому" aria-label="Search">
+                                   title="Максимально 4 шифри.&#013;Припускається шукати по частині шифру.&#013;Шифр довжиною більше 6 цифр буде обрізано."
+                                   placeholder="можна декілька шифрів через пробіл" aria-label="Search">
                         </div>
                         <div align="center">
                             <button class="btn btn-outline-secondary" type="submit">Пошук</button>

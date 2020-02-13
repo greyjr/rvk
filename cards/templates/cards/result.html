@@ -6,6 +6,8 @@
 
 {% block content %}
 
+{{ data }}
+
     <br>
 
     <div align="center">
@@ -41,36 +43,6 @@
         </table>
     </div>
     <br>
-
-    <nav>
-        <ul class="pagination justify-content-center">
-            {% if cards.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ cards.previous_page_number }};mode={{ mode }}">Попередня</a></li>
-                <li class="page-item"><a class="page-link" href="?page={{ cards.previous_page_number }};mode={{ mode }}">{{ cards.previous_page_number }}</a></li>
-
-            {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link" tabindex="-1" aria-disabled="true">Попередня</a></li>
-
-            {% endif %}
-
-            <li class="page-item active" aria-current="page">
-                    <span class="page-link">
-                        {{ cards.number }} <span class="sr-only">(current)</span></span></li>
-
-            {% if cards.has_next %}
-                <li class="page-item"><a class="page-link" href="?page={{ cards.next_page_number }};mode={{ mode }}">{{ cards.next_page_number }}</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ cards.next_page_number }};mode={{ mode }}">Наступна</a></li>
-            {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link" tabindex="1" aria-disabled="true">Наступна</a></li>
-            {% endif %}
-
-
-        </ul>
-    </nav>
 
 
     <script>

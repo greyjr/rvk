@@ -22,10 +22,12 @@ def validate_inn_unique(inn_raw):
         raise ValidationError('такий номер існує !')
 
 
+class CardFormEdit(forms.Form):
+    pass
+
+
 class CardForm(forms.Form):
-    inn = forms.DecimalField(decimal_places=0,
-                             validators=[validate_inn_length, validate_inn_unique],
-                             label='Персональний номер')
+    inn = forms.DecimalField(decimal_places=0, validators=[validate_inn_length, validate_inn_unique], label='Персональний номер')
     surname_person = forms.CharField(max_length=64, label='Прізвіще')
     name_person = forms.CharField(max_length=64, label="Ім'я")
     patronymic_person = forms.CharField(max_length=64, label='По-батькові')
@@ -33,8 +35,7 @@ class CardForm(forms.Form):
     address_person = forms.CharField(max_length=128, label='Адреса реєстрації')
     address_person_fact = forms.CharField(max_length=128, label='Проживає', required=False)
     # phone = forms.DecimalField(max_digits=9, decimal_places=0, label='Телефон', required=False)  # (+380 ...)
-    phone = forms.CharField(validators=[
-        RegexValidator(regex='^((8|\+38)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$', message="Wrong number")])
+    phone = forms.CharField(validators=[RegexValidator(regex='^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$', message="Wrong number")])
     work = forms.CharField(max_length=256, label='Місце роботи/посада', initial='ТНП')
     vos = forms.CharField(max_length=6, label='ВОС')
     rank = forms.ChoiceField(label='Звання', choices=tuple((x, x) for x in rank_variants))
@@ -81,13 +82,9 @@ class CardForm(forms.Form):
         )
         return new_card
 
-
-class CardFormEdit(CardForm):
-    inn = forms.DecimalField(label='Персональний номер')
-    inn.widget.attrs.update({'readonly': 'readonly', 'class': 'form-control form-control-sm'})
-
     def update(self, idi):
         re_card = Card.objects.get(id=idi)
+        # re_card.inn = self.cleaned_data['inn']
         re_card.surname_person = self.cleaned_data['surname_person']
         re_card.name_person = self.cleaned_data['name_person']
         re_card.patronymic_person = self.cleaned_data['patronymic_person']
@@ -104,5 +101,3 @@ class CardFormEdit(CardForm):
         re_card.team = self.cleaned_data['team']
         re_card.save()
         return re_card
-
-

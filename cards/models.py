@@ -71,6 +71,7 @@ class Card(models.Model):
                 self.name_person,
                 self.patronymic_person,
                 self.birth_date,
+                self.age_person(),
                 self.phone,
                 self.rank,
                 self.suitability,

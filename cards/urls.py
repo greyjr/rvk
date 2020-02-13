@@ -10,5 +10,5 @@ urlpatterns = [
     path('delete/<int:idi>', delete, name='card_delete_url'),
     path('base', base, name='base_url'),
     path('personal_view/<int:idi>', personal_view, name='personal_view_url'),
-    path('search/<str:field>', search, name='search_url')
+    path('search/<str:field>', search, name='search_url'),
 ]
