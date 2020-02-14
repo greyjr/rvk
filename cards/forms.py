@@ -34,7 +34,8 @@ class CardForm(forms.Form):
     address_person_fact = forms.CharField(max_length=128, label='Проживає', required=False)
     # phone = forms.DecimalField(max_digits=9, decimal_places=0, label='Телефон', required=False)  # (+380 ...)
     phone = forms.CharField(validators=[
-        RegexValidator(regex='^((8|\+38)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$', message="Wrong number")])
+        RegexValidator(regex='^((8|\+38)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$', message="Wrong number")],
+        required=False)
     work = forms.CharField(max_length=256, label='Місце роботи/посада', initial='ТНП')
     vos = forms.CharField(max_length=6, label='ВОС')
     rank = forms.ChoiceField(label='Звання', choices=tuple((x, x) for x in rank_variants))
@@ -62,6 +63,7 @@ class CardForm(forms.Form):
     def save(self):
         if not self.cleaned_data['address_person_fact']:
             self.cleaned_data['address_person_fact'] = self.cleaned_data['address_person']
+        self.cleaned_data['phone'].replace(' ', '')
         new_card = Card.objects.create(
             inn=self.cleaned_data['inn'],
             surname_person=self.cleaned_data['surname_person'],
@@ -94,7 +96,7 @@ class CardFormEdit(CardForm):
         re_card.birth_date = self.cleaned_data['birth_date']
         re_card.address_person = self.cleaned_data['address_person']
         re_card.address_person_fact = self.cleaned_data['address_person_fact']
-        re_card.phone = self.cleaned_data['phone']
+        re_card.phone = self.cleaned_data['phone'].replace(' ', '')
         re_card.work = self.cleaned_data['work']
         re_card.vos = self.cleaned_data['vos']
         re_card.rank = self.cleaned_data['rank']
@@ -104,5 +106,3 @@ class CardFormEdit(CardForm):
         re_card.team = self.cleaned_data['team']
         re_card.save()
         return re_card
-
-

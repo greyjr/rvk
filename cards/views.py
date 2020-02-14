@@ -71,27 +71,7 @@ def base(request):
 
 def personal_view(request, idi):
     card = Card.objects.get(id=idi)
-    fields_first = ['Персональний номер',
-                    "Прізвище",
-                    "Ім'я",
-                    'По-батькові',
-                    "Дата народження",
-                    "Вік",
-                    "Телефон",
-                    "Звання",
-                    "Придатність",
-                    "Відсрочка"]
-    fields_second = ["Адреса реєстрації",
-                     "Фактична адреса проживання",
-                     "Місце роботи / посада",
-                     "ВОС",
-                     "ВЛК",
-                     "Команда"]
-    data_first = {fields_first[i]: card.get_first_personal_page_values()[i] for i in range(10)}
-    data_second = {fields_second[i]: card.get_second_personal_page_values()[i] for i in range(6)}
-    return render(request, 'cards/personal_main.html', context={'data_first': data_first,
-                                                                'data_second': data_second,
-                                                                'idi': idi})
+    return render(request, 'cards/personal_main.html', context={'card': card, 'idi': idi})
 
 
 def parsed(line):

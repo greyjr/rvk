@@ -6,20 +6,15 @@
 
 {% block content %}
 
-{{ data }}
+    {{ data }}
 
     <br>
-
     <div align="center">
-        <div align="center">
-            <a href="/" class="btn btn-outline-secondary btn-sm">На сторінку пошуку</a>
-            <a href="{% url 'card_create_url' %}" class="btn btn-outline-secondary btn-sm">Реєстрація</a>
-        </div>
+        <a href="/" class="btn btn-outline-secondary btn-sm">На сторінку пошуку</a>
+        <a href="{% url 'card_create_url' %}" class="btn btn-outline-secondary btn-sm">Реєстрація</a>
     </div>
+    <hr>
 
-
-
-    <br>
     <div class="" align="center">
         <table class="table-hover">
             <thead class="thead-dark">

@@ -5,6 +5,9 @@ body{
 form{
   margin: 5px;
 }
+hr{
+  width: 80%;
+}
 .row{
   margin-right: 1px;
   margin-left: 1px;
@@ -23,25 +26,51 @@ td, th{
 td{
   padding-left: 7px;
 }
-#personal_card{
-text-align: left;
-border-collapse: separate;
-border-spacing: 5px;
-background: #ECE9E0;
-color: #656665;
-border: 16px solid #ECE9E0;
-border-radius: 10px;
+.personal_card{
+  width: 80%;
+  text-align: left;
+  border-collapse: separate;
+  border-spacing: 5px;
+  background: #dfeccb;
+  color: #656665;
+  border: 16px solid #dfeccb;
+  border-radius: 10px;
 }
-#personal_card_header{
+.personal_card_header{
+  width: 40%;
   font-size: 14px;
   padding: 10px;
   border: none;
 }
-#personal_card_cell{
-  background: #9de09d;
+.personal_card_cell{
+  background: #d3dfa8;
   padding: 10px;
   border: none;
-  color: #343a3e;
+  color: #22282c;
+  font-size: 16px;
+}
+.personal_card_name{
+  text-align: left;
+  border-collapse: separate;
+  border-spacing: 5px;
+  background: #dfeccb;
+  color: #656665;
+  border: 8px solid #dfeccb;
+  border-radius: 5px;
+}
+.personal_card_header_name{
+  width: 20%;
+  font-size: 14px;
+  padding: 10px;
+  border: none;
+}
+.personal_card_cell_name{
+  background: #d3dfa8;
+  padding: 10px;
+  border: none;
+  color: #52595f;
+  font-size: 18px;
+  font-weight: bold;
 }
 #pagination{
   position: center;
@@ -52,11 +81,11 @@ border-radius: 10px;
 }
 
 .page-item.active .page-link {
-    background-color: #b3c68b !important;
-    border: 1px solid #C8D2A0;
+  background-color: #b3c68b !important;
+  border: 1px solid #C8D2A0;
 }
 .page-link {
-    color: black !important;
+  color: black !important;
 }
 
 #search_table{
@@ -65,4 +94,7 @@ border-radius: 10px;
 #search_table>tr>td{
   border: none;
   word-break: break-all;
+}
+.modal.fade .modal-dialog {
+  transition: -webkit-transform 10ms ease-out;
 }

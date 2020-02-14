@@ -7,23 +7,17 @@
 {% block content %}
 
     <br>
-
     <div align="center">
-        <div align="center">
-            <button type="button" class="btn btn-outline-secondary btn-sm" data-target="#exampleModal" data-toggle="modal" >На сторінку пошуку</button>
-
-        </div>
+        <button type="button" class="btn btn-outline-secondary btn-sm" data-target="#exampleModal" data-toggle="modal" >На сторінку пошуку</button>
     </div>
-
-    <br>
+    <hr>
 
     <div class="row justify-content-lg-center">
         <form action="{% url 'card_create_url' %}" method="post" style="width: 80%; align-content: center">
             {% csrf_token %}
-            <hr>
             {% for field in form %}
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-2">
                     {% if field.errors %}
                         <div class="alert alert-danger">
                             {{ field.errors }}

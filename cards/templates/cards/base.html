@@ -6,22 +6,19 @@
 
 {% block content %}
 
-<br>
-    <div align="center">
-        <div align="center">
-            <a href="/" class="btn btn-outline-secondary btn-sm">На сторінку пошуку</a>
-            <a href="{% url 'card_create_url' %}" class="btn btn-outline-secondary btn-sm">Реєстрація</a>
-        </div>
     <br>
+    <div align="center">
+        <a href="/" class="btn btn-outline-secondary btn-sm">На сторінку пошуку</a>
+        <a href="{% url 'card_create_url' %}" class="btn btn-outline-secondary btn-sm">Реєстрація</a>
     </div>
-
+    <hr>
 
     <div class="justify-content-center" align="center">
-            <button type="button" class="btn btn-light btn-sm" disabled> сортування:</button>
-            <a href="?page={{ cards.number }};mode=inn" class="btn btn-outline-dark btn-sm">персональний номер</a>
-            <a href="?page={{ cards.number }};mode=surname_person" class="btn btn-outline-dark btn-sm">ПІБ</a>
-            <a href="?page={{ cards.number }};mode=rank" class="btn btn-outline-dark btn-sm">звання</a>
-            <a href="?page={{ cards.number }};mode=vos" class="btn btn-outline-dark btn-sm">ВОС</a>
+        <button type="button" class="btn btn-light btn-sm" disabled> сортування:</button>
+        <a href="?page={{ cards.number }};mode=inn" class="btn btn-outline-dark btn-sm">персональний номер</a>
+        <a href="?page={{ cards.number }};mode=surname_person" class="btn btn-outline-dark btn-sm">ПІБ</a>
+        <a href="?page={{ cards.number }};mode=rank" class="btn btn-outline-dark btn-sm">звання</a>
+        <a href="?page={{ cards.number }};mode=vos" class="btn btn-outline-dark btn-sm">ВОС</a>
     </div>
 
     <br>

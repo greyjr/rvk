@@ -1,35 +1,32 @@
 {% extends 'cards/wrapper.html' %}
 
 {% block title %}
-редагування картки
+    редагування картки
 {% endblock %}
 
 {% block content %}
 
     <br>
     <div align="center">
-        <div align="center">
-            <a href="{% url 'main_url' %}"><button type="button" class="btn btn-outline-secondary btn-sm">На сторінку пошуку</button></a>
-            <a href="{% url 'base_url' %}"><button type="button" class="btn btn-outline-secondary btn-sm">База</button></a>
-            <button type="button" class="btn btn-outline-secondary btn-sm" data-target="#exampleModal3" data-toggle="modal" >Перезавантажити картку</button>
-            <button type="button" class="btn btn-outline-danger btn-sm" data-target="#exampleModal2" data-toggle="modal" >Видалити картку</button>
-
-        </div>
+        <a href="{% url 'main_url' %}" class="btn btn-outline-secondary btn-sm">На сторінку пошуку</a>
+        <a href="{% url 'base_url' %}"class="btn btn-outline-secondary btn-sm">База</a>
+        <a href="{% url 'personal_view_url' idi %}" class="btn btn-outline-secondary btn-sm">Особова картка</a>
+        <button type="button" class="btn btn-outline-secondary btn-sm" data-target="#exampleModal3" data-toggle="modal" >Перезавантажити картку</button>
+        <button type="button" class="btn btn-outline-danger btn-sm" data-target="#exampleModal2" data-toggle="modal" >Видалити картку</button>
     </div>
+    <hr>
 
-    <br>
     <div class="row justify-content-lg-center">
         <form action="{%  url 'card_edit_url' idi %}" method="post" style="width: 80%; align-content: center">
             {% csrf_token %}
-            <hr>
             {% for field in form %}
                 <div class="row">
-                    <div class="col-3">
-                    {% if field.errors %}
-                        <div class="alert alert-danger">
-                            {{ field.errors }}
-                        </div>
-                    {% endif %}
+                    <div class="col-2">
+                        {% if field.errors %}
+                            <div class="alert alert-danger">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
                     </div>
                     <label class="col-2 col-form-label">{{ field.label }}</label>
                     <div class="col-6">
@@ -44,48 +41,48 @@
         </form>
     </div>
 
-<!--                    ----- 1 MODAL MENU HOME PAGE -----                 -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-body">
-				Дані не будуть збережені. Ви впевнені?
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-outline-success btn-sm" data-dismiss="modal">НІ</button>
-				<a href="/" class="btn btn-outline-danger btn-sm">ТАК</a>
-			</div>
-		</div>
-	</div>
-</div>
+    <!--                    ----- 1 MODAL MENU HOME PAGE -----                 -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Дані не будуть збережені. Ви впевнені?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success btn-sm" data-dismiss="modal">НІ</button>
+                    <a href="/" class="btn btn-outline-danger btn-sm">ТАК</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<!--                    ----- 2 MODAL MENU HOME PAGE -----                 -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-body">
-                Картку буле видалено. Ви впевнені?
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-outline-success btn-sm" data-dismiss="modal">НІ</button>
-				<a href="{% url 'card_delete_url' idi %}" class="btn btn-outline-danger btn-sm">ТАК</a>
-			</div>
-		</div>
-	</div>
-</div>
+    <!--                    ----- 2 MODAL MENU HOME PAGE -----                 -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Картку буле видалено. Ви впевнені?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success btn-sm" data-dismiss="modal">НІ</button>
+                    <a href="{% url 'card_delete_url' idi %}" class="btn btn-outline-danger btn-sm">ТАК</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<!--                    ----- 3 MODAL MENU HOME PAGE -----                 -->
-<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-body">
-                Ви бажаєте перезавантажити картку?
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-outline-success btn-sm" data-dismiss="modal">НІ</button>
-				<a href="{% url 'card_edit_url' idi %}" class="btn btn-outline-danger btn-sm">ТАК</a>
-			</div>
-		</div>
-	</div>
-</div>
+    <!--                    ----- 3 MODAL MENU HOME PAGE -----                 -->
+    <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Ви бажаєте перезавантажити картку?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success btn-sm" data-dismiss="modal">НІ</button>
+                    <a href="{% url 'card_edit_url' idi %}" class="btn btn-outline-danger btn-sm">ТАК</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

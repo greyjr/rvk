@@ -1,48 +1,59 @@
 {% extends 'cards/wrapper.html' %}
 
 {% block title %}
-main page
+    main page
 {% endblock %}
 
 {% block content %}
 
-<br>
-
-<div align="center">
-    <div align="center">
-        <a href="/" class="btn btn-outline-secondary btn-sm">На сторінку пошуку</a>
-        <a href="{% url 'card_edit_url' idi %}" class="btn btn-outline-secondary btn-sm">Редагування</a>
-    </div>
-</div>
-
     <br>
-    <div align="center" class="row">
-    <div class="col-6" align="right" style="padding-right: 10px">
+    <div align="center">
+            <a href="/" class="btn btn-outline-secondary btn-sm">На сторінку пошуку</a>
+            <a href="{% url 'base_url' %}" class="btn btn-outline-secondary btn-sm">База</a>
+            <a href="{% url 'card_edit_url' idi %}" class="btn btn-outline-secondary btn-sm">Редагування</a>
+    </div>
+    <hr>
 
-        <table id="personal_card">
+    <div align="center">
+        <table class="personal_card_name">
             <tbody>
-            {% for key, value in data_first.items %}
-                <tr>
-                    <td id="personal_card_header">{{ key }}</td>
-                    <td id="personal_card_cell">{{ value }}</td>
-                </tr>
-           {% endfor %}
+            <tr>
+                <td class="personal_card_header_name">ПІБ: </td>
+                <td class="personal_card_cell_name">{{ card.get_pib }}</td>
+            </tr>
             </tbody>
         </table>
     </div>
+    <br>
+    <div class="row" align="center">
+        <div class="col-6" align="right" style="padding-left: 10px">
 
-    <div class="col-6" align="left" style="padding-left: 10px">
-         <table id="personal_card">
-            <tbody>
-            {% for key, value in data_second.items %}
+            <table class="personal_card">
+                <tbody>
+                {% for key, value in card.get_left_card.items %}
+                    {% if value %}
                 <tr>
-                    <td id="personal_card_header">{{ key }}</td>
-                    <td id="personal_card_cell">{{ value }}</td>
+                    <td class="personal_card_header"> {{ key }} </td>
+                    <td class="personal_card_cell" {% if key == '' %}style="color: {{ card.delay_color }}" {% endif %}> {{ value }} </td>
                 </tr>
-           {% endfor %}
-            </tbody>
-        </table>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-    </div>
+        <div class="col-6" align="left" style="padding-right: 10px">
+            <table class="personal_card">
+                <tbody>
+                {% for key, value in card.get_right_card.items %}
+                <tr>
+                    <td class="personal_card_header"> {{ key }} </td>
+                    <td class="personal_card_cell"> {{ value }} </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
     </div>
 {% endblock %}
