@@ -61,6 +61,9 @@ class Card(models.Model):
         else:
             return 'Не вказана'
 
+    def is_delay(self):
+        return bool(self.delay)
+
     def get_delay(self):
         if self.delay:
             return self.delay
@@ -69,7 +72,7 @@ class Card(models.Model):
 
     def fact_delay(self):
         if not self.delay:
-            return ''
+            return '-'
         if date.today() > self.delay:
             return 'закінчилась'
         delta_days = self.delay.day - date.today().day
@@ -80,26 +83,28 @@ class Card(models.Model):
     def get_pib(self):
         return self.surname_person + ' ' + self.name_person + ' ' + self.patronymic_person
 
-    def get_left_card(self):
-        return {'Персональний номер': self.inn,
-                "Дата народження": self.birth_date,
-                "Вік": self.age_person(),
-                "Телефон": self.get_phone(),
-                "Звання": self.rank,
-                "Придатність": self.suitability,
-                "Відсрочка": self.get_delay(),
-                "": self.fact_delay()}
-
     def get_right_card(self):
-        return {"Адреса реєстрації": self.address_person,
-                "Фактична адреса проживання": self.address_person_fact,
-                "Місце роботи / посада": self.work,
-                "ВОС": self.vos,
-                "ВЛК": self.get_vlk(),
-                "Команда": self.team}
+        return [{"Адреса реєстрації": self.address_person},
+                {"Фактична адреса проживання": self.address_person_fact},
+                {"Місце роботи / посада": self.work},
+                {"ВОС": self.vos},
+                {"ВЛК": self.get_vlk()},
+                {"Команда": self.team}]
+
+    def get_left_card(self):
+        return [{'Персональний номер': self.inn},
+                {"Дата народження": self.birth_date},
+                {"Вік": self.age_person()},
+                {"Телефон": self.get_phone()},
+                {"Звання": self.rank},
+                {"Придатність": self.suitability},
+                {"Відсрочка": self.get_delay()},
+                {"Термін відсрочки": self.fact_delay()}]
 
     def delay_color(self):
-        if self.delay < date.today():
+        if not self.delay:
+            color = '#656665'
+        elif self.delay < date.today():
             color = '#2cb864'
         else:
             color = '#da0560'

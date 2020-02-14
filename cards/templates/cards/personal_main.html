@@ -30,13 +30,12 @@
 
             <table class="personal_card">
                 <tbody>
-                {% for key, value in card.get_left_card.items %}
-                    {% if value %}
-                <tr>
+                {% for line in card.get_left_card %}
+                <tr> {% for key, value in line.items %}
                     <td class="personal_card_header"> {{ key }} </td>
-                    <td class="personal_card_cell" {% if key == '' %}style="color: {{ card.delay_color }}" {% endif %}> {{ value }} </td>
+                    <td class="personal_card_cell" {% if key == 'Термін відсрочки' %}style="color: {{ card.delay_color }}" {% endif %}> {{ value }} </td>
+                {% endfor %}
                 </tr>
-                    {% endif %}
                 {% endfor %}
                 </tbody>
             </table>
@@ -45,10 +44,10 @@
         <div class="col-6" align="left" style="padding-right: 10px">
             <table class="personal_card">
                 <tbody>
-                {% for key, value in card.get_right_card.items %}
-                <tr>
+                {% for line in card.get_right_card %}
+                <tr> {% for key, value in line.items %}
                     <td class="personal_card_header"> {{ key }} </td>
-                    <td class="personal_card_cell"> {{ value }} </td>
+                    <td class="personal_card_cell"> {{ value }} </td> {% endfor %}
                 </tr>
                 {% endfor %}
                 </tbody>
